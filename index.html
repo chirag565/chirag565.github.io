@@ -860,7 +860,7 @@ body {
     const message = (name, url) => [
       "🪔 ॥ શ્રી ગણેશાય નમઃ ॥ 🪔", "",
       "💌 Dear *" + name + "*,", "",
-      // WhatsApp builds its preview from the first link, so the invitation comes before the map
+      // WhatsApp builds its preview from the first link in the message
       "🎀 Your invitation: " + url, "",
       "With the blessings of our elders 🙏 we joyfully invite you to the",
       "💍 *Engagement Ceremony* 💍",
@@ -870,7 +870,6 @@ body {
       "⏰ *10:00 AM onwards*",
       "🏨 *Hotel Platinum*",
       "📍 Opp. Pathikashram, Jubilee Garden, Jawahar Road, Rajkot", "",
-      "🗺️ Directions: https://maps.google.com/?q=Hotel+Platinum+Rajkot", "",
       "🎊 Your presence and blessings will make our day complete 🌺"
     ].join("\n");
     const copy = async (text, btn) => {
