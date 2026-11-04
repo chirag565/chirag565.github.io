@@ -6,7 +6,9 @@
 <meta name="description" content="Engagement Ceremony of Chirag & Janvi · Sunday 15 November 2026, 10:00 AM onwards · Hotel Platinum, Rajkot">
 <meta property="og:title" content="Chirag & Janvi · Engagement Ceremony">
 <meta property="og:description" content="Sunday 15 November 2026 · 10:00 AM onwards · Hotel Platinum, Rajkot">
-<meta property="og:image" content="https://chirag565.github.io/preview.jpg">
+<meta property="og:image" content="https://chirag565.github.io/invite-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
 <meta property="og:url" content="https://chirag565.github.io/">
 <meta property="og:type" content="website">
 <title>Chirag sang Janvi · Engagement</title>
@@ -858,6 +860,8 @@ body {
     const message = (name, url) => [
       "🪔 ॥ શ્રી ગણેશાય નમઃ ॥ 🪔", "",
       "💌 Dear *" + name + "*,", "",
+      // WhatsApp builds its preview from the first link, so the invitation comes before the map
+      "🎀 Your invitation: " + url, "",
       "With the blessings of our elders 🙏 we joyfully invite you to the",
       "💍 *Engagement Ceremony* 💍",
       "✨ *Chirag & Janvi* ✨",
@@ -866,8 +870,7 @@ body {
       "⏰ *10:00 AM onwards*",
       "🏨 *Hotel Platinum*",
       "📍 Opp. Pathikashram, Jubilee Garden, Jawahar Road, Rajkot", "",
-      "🗺️ Directions: https://maps.google.com/?q=Hotel+Platinum+Rajkot",
-      "🎀 Your invitation: " + url, "",
+      "🗺️ Directions: https://maps.google.com/?q=Hotel+Platinum+Rajkot", "",
       "🎊 Your presence and blessings will make our day complete 🌺"
     ].join("\n");
     const copy = async (text, btn) => {
