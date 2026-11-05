@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chirag sang Janvi · Engagement</title>
-<meta name="description" content="Engagement Ceremony of Chirag & Janvi · Sunday 15 November 2026, 10:00 AM onwards · Hotel Platinum, Rajkot">
+<meta name="description" content="Engagement Ceremony of Chirag & Janvi · Sunday 15 November 2026, 9:00 AM onwards · Hotel Platinum, Rajkot">
 <meta property="og:title" content="Chirag & Janvi · Engagement Ceremony">
-<meta property="og:description" content="Sunday 15 November 2026 · 10:00 AM onwards · Hotel Platinum, Rajkot">
+<meta property="og:description" content="Sunday 15 November 2026 · 9:00 AM onwards · Hotel Platinum, Rajkot">
 <meta property="og:image" content="https://chirag565.github.io/storybook-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -315,6 +315,9 @@ body[data-page="0"] .s0, body[data-page="1"] .s1, body[data-page="2"] .s2, body[
 .print *, .print *::before, .print *::after { animation: none !important; transition: none !important; }
 .print .scratch canvas { display: none; }
 .print .after { opacity: 1; transform: none; }
+/* gradient-clipped text prints with a hairline box, and a countdown on paper would be stale */
+.print .foil { background: none; color: var(--rg-lo); -webkit-text-fill-color: var(--rg-lo); }
+.print .ticks { display: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
 }
@@ -392,7 +395,7 @@ body[data-page="0"] .s0, body[data-page="1"] .s1, body[data-page="2"] .s2, body[
             <span class="day">Sunday</span>
             <span class="num foil">15</span>
             <span class="month">November 2026</span>
-            <span class="time">10:00 AM onwards</span>
+            <span class="time">9:00 AM onwards</span>
           </div>
           <canvas id="foil" aria-label="Scratch to reveal the date" role="img"></canvas>
         </div>
@@ -409,7 +412,7 @@ body[data-page="0"] .s0, body[data-page="1"] .s1, body[data-page="2"] .s2, body[
             <div class="tick"><b id="cd-s">--</b><span>Secs</span></div>
           </div>
           <a class="btn ghost" target="_blank" rel="noopener"
-             href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Engagement%20Ceremony%20%E2%80%93%20Chirag%20%26%20Janvi&amp;dates=20261115T043000Z%2F20261115T093000Z&amp;ctz=Asia%2FKolkata&amp;location=Hotel%20Platinum%2C%20Opp.%20Pathikashram%2C%20Jubilee%20Garden%2C%20Jawahar%20Road%2C%20Rajkot%2C%20Gujarat%20360001&amp;details=Engagement%20ceremony%20of%20Chirag%20%26%20Janvi.%20From%2010%3A00%20AM%20onwards.">
+             href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Engagement%20Ceremony%20%E2%80%93%20Chirag%20%26%20Janvi&amp;dates=20261115T033000Z%2F20261115T093000Z&amp;ctz=Asia%2FKolkata&amp;location=Hotel%20Platinum%2C%20Opp.%20Pathikashram%2C%20Jubilee%20Garden%2C%20Jawahar%20Road%2C%20Rajkot%2C%20Gujarat%20360001&amp;details=Engagement%20ceremony%20of%20Chirag%20%26%20Janvi.%20From%209%3A00%20AM%20onwards.">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>
             Add to calendar
           </a>
@@ -502,7 +505,7 @@ body[data-page="0"] .s0, body[data-page="1"] .s1, body[data-page="2"] .s2, body[
 
 <script>
 (() => {
-  const EVENT = new Date("2026-11-15T10:00:00+05:30").getTime();
+  const EVENT = new Date("2026-11-15T09:00:00+05:30").getTime();
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
@@ -649,7 +652,7 @@ body[data-page="0"] .s0, body[data-page="1"] .s1, body[data-page="2"] .s2, body[
       "✨ *Chirag & Janvi* ✨",
       "🌸 સગાઈ સમારંભ 🌸", "",
       "📅 *Sunday, 15 November 2026*",
-      "⏰ *10:00 AM onwards*",
+      "⏰ *9:00 AM onwards*",
       "🏨 *Hotel Platinum*",
       "📍 Opp. Pathikashram, Jubilee Garden, Jawahar Road, Rajkot", "",
       "🎊 Your presence and blessings will make our day complete 🌺"
