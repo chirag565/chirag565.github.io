@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+Gujarati:wght@500&display=swap">
 <style>
-/* One scrolling page of pastel paper cards floating in a living sky. Each card's paper-cut layers stand up
+/* One long pastel paper card floating in a living sky. Each part of the card's paper-cut layers stand up
    as it scrolls into view and lean with the phone's tilt. Phones get one column; wide screens put the words
    beside the artwork. Single light theme: it is paper. */
 :root {
@@ -66,17 +66,22 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(40px, -30px) scale(1.15); } }
 @keyframes sway { from { transform: translateX(-10px) rotate(-4deg); } to { transform: translateX(10px) rotate(4deg); } }
 
-/* ---------- the cards ---------- */
-.flow { --tx: 0px; --ty: 0px; position: relative; z-index: 2; padding: 0 12px calc(24px + env(safe-area-inset-bottom)); }
-.sheet {
-  position: relative; margin: 0 auto 26px; width: 100%; max-width: 560px; border-radius: 20px; overflow: hidden;
-  display: flex; flex-direction: column; align-items: center; text-align: center; padding: 46px 24px 44px;
-  background: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, .75), transparent 60%), var(--paper-tex), var(--paper);
+/* ---------- the one card; each part fades up as it scrolls in ---------- */
+.flow { --tx: 0px; --ty: 0px; position: relative; z-index: 2; padding: 12px 12px calc(24px + env(safe-area-inset-bottom)); }
+.card {
+  position: relative; margin: 0 auto; width: 100%; max-width: 560px; border-radius: 22px; overflow: hidden;
+  background: radial-gradient(120% 30% at 50% 22%, rgba(255, 255, 255, .7), transparent 60%), var(--paper-tex), var(--paper);
   box-shadow: 0 24px 60px rgba(76, 51, 64, .16), 0 2px 0 rgba(255, 255, 255, .8) inset;
-  opacity: 0; transform: translateY(40px) scale(.97); transition: opacity 1s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1);
 }
-.sheet.seen { opacity: 1; transform: none; }
+.card > .frame { z-index: 4 !important; }
+.sheet { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 64px 24px 52px; }
 .sheet > *, .half > * { position: relative; z-index: 2; }
+.sheet:not(.cover) > :not(.frame):not(.sprig):not(.half), .sheet .half > * { opacity: 0; transform: translateY(34px); transition: opacity 1s ease, transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+.sheet.seen > :not(.frame):not(.sprig):not(.half), .sheet.seen .half > * { opacity: 1; transform: none; }
+.sheet .half > :nth-child(2) { transition-delay: .1s; } .sheet .half > :nth-child(3) { transition-delay: .2s; } .sheet .half > :nth-child(n+4) { transition-delay: .3s; }
+/* a rose-gold flourish where one part of the card gives way to the next */
+.sheet:not(.cover)::before { content: ""; position: absolute; top: 18px; left: 50%; width: min(240px, 64%); height: 22px; translate: -50% 0; z-index: 2;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 22'%3E%3Cg fill='none' stroke='%23b8795e' stroke-width='1'%3E%3Cpath d='M4 11H96M144 11H236' stroke-opacity='.55'/%3E%3Cpath d='M96 11Q108 1 120 11Q132 21 144 11' /%3E%3Cpath d='M96 11Q108 21 120 11Q132 1 144 11' stroke-opacity='.6'/%3E%3C/g%3E%3Ccircle cx='120' cy='11' r='3.2' fill='%23d98f98'/%3E%3Ccircle cx='4' cy='11' r='1.6' fill='%23b8795e'/%3E%3Ccircle cx='236' cy='11' r='1.6' fill='%23b8795e'/%3E%3C/svg%3E") center / contain no-repeat; }
 .half { display: contents; }
 .o2 { order: 2; } .o3 { order: 3; }
 .frame { position: absolute !important; inset: 10px; z-index: 1 !important; border: 1px solid rgba(184, 121, 94, .55); border-radius: 13px; pointer-events: none; }
@@ -118,13 +123,13 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 
 /* ---------- cover ---------- */
 .cover {
-  min-height: calc(100svh - 24px); margin-top: 12px; justify-content: center; gap: 2px;
+  min-height: calc(100svh - 24px); justify-content: center; gap: 2px; padding-bottom: 90px;
   background:
+    linear-gradient(180deg, transparent 78%, var(--paper) 100%),
     repeating-linear-gradient(45deg, rgba(255, 255, 255, .09) 0 1px, transparent 1px 4px),
     repeating-linear-gradient(-45deg, rgba(138, 85, 65, .05) 0 1px, transparent 1px 4px),
     radial-gradient(110% 80% at 50% 30%, #f9e3df, #efc7c5 70%, #e7b6b6);
 }
-.cover .frame { border-color: var(--rg); border-width: 1.5px; }
 .wreath { width: min(240px, 62vw); aspect-ratio: 1; position: relative; margin: 14px 0 10px; }
 .wreath svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .wreath .mono { position: absolute; inset: 22%; border-radius: 50%; display: grid; place-items: center;
@@ -207,12 +212,14 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 
 /* ---------- wide screens: words beside the artwork, using the whole screen ---------- */
 @media (min-width: 900px) {
-  .flow { padding: 0 4vw 30px; }
-  .sheet { max-width: 1180px; min-height: 86vh; margin-bottom: 40px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; column-gap: 4vw; padding: 60px 5vw; }
+  .flow { padding: 20px 4vw 30px; }
+  .card { max-width: 1180px; border-radius: 28px; }
+  .sheet { min-height: 86vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; column-gap: 4vw; padding: 80px 5vw 60px; }
   .sheet.solo { grid-template-columns: 1fr; justify-items: center; }
   .half { display: flex; flex-direction: column; align-items: center; }
   .o2, .o3 { order: 0; }
-  .cover { max-width: 680px; min-height: calc(100vh - 40px); margin-top: 20px; }
+  .cover { min-height: calc(100vh - 40px); }
+  .sheet:not(.cover)::before { top: 26px; width: 300px; height: 28px; }
   .stage { height: min(72vh, 640px); margin: 0; }
   .names { font-size: clamp(54px, 4.6vw, 76px); }
   .title { font-size: clamp(40px, 3.4vw, 56px); }
@@ -251,11 +258,14 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 .maker .row { display: flex; flex-wrap: wrap; gap: 8px; }
 .maker .row .btn { margin: 0; padding: 9px 14px; font-size: 11px; }
 
-/* ---------- print mode (#print): every card open and still, one per PDF page ---------- */
+/* ---------- print mode (#print): the whole card open and still, on one tall PDF page ---------- */
 .print body { background: var(--paper-2); }
-.print .scene, .print #petals, .print .music, .print .scroll-cue, .print .release, .print .foot { display: none; }
+.print .scene, .print .ribbon, .print #petals, .print .music, .print .scroll-cue, .print .release, .print .foot { display: none; }
 .print .flow { padding: 0; }
-.print .sheet { width: 560px; max-width: none; height: 965px; min-height: 0; margin: 0 auto; border-radius: 0; box-shadow: none; opacity: 1; transform: none; break-after: page; justify-content: center; }
+.print .card { width: 560px; max-width: none; border-radius: 0; box-shadow: none; }
+.print .sheet > *, .print .sheet .half > * { opacity: 1 !important; transform: none !important; }
+.print .cover { min-height: 0; padding-top: 70px; }
+.print .stage { height: 470px !important; }
 .print *, .print *::before, .print *::after { animation: none !important; transition: none !important; }
 .print .scratch canvas, .print .ticks { display: none; }
 .print .after { opacity: 1; }
@@ -263,7 +273,7 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 .print .foil { background: none; color: var(--rg-lo); -webkit-text-fill-color: var(--rg-lo); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
-  .sheet { opacity: 1; transform: none; }
+  .sheet > *, .sheet .half > * { opacity: 1 !important; transform: none !important; }
 }
 </style>
 </head>
@@ -279,10 +289,11 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 </button>
 
 <main class="flow" id="flow" aria-label="Engagement invitation of Chirag and Janvi">
+<div class="card">
+  <div class="frame" aria-hidden="true"></div>
 
   <!-- cover -->
   <section class="sheet cover solo" data-sky="0" id="cover">
-    <div class="frame" aria-hidden="true"></div>
     <p class="caps">The engagement of</p>
     <div class="wreath" aria-hidden="true">
       <svg viewBox="0 0 200 200" id="wreath"></svg>
@@ -301,7 +312,6 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 
   <!-- blessing and the couple -->
   <section class="sheet" data-sky="1" id="blessing">
-    <div class="frame" aria-hidden="true"></div>
     <div class="half">
       <p class="gu" lang="gu">॥ શ્રી ગણેશાય નમઃ ॥</p>
       <p class="lede" id="dear" hidden></p>
@@ -322,7 +332,6 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 
   <!-- save the date -->
   <section class="sheet" data-sky="2" id="date">
-    <div class="frame" aria-hidden="true"></div>
     <div class="sprig tl" aria-hidden="true"><svg viewBox="0 0 120 120" class="sprig-svg"></svg></div>
     <div class="sprig br" aria-hidden="true"><svg viewBox="0 0 120 120" class="sprig-svg"></svg></div>
     <div class="half">
@@ -355,7 +364,6 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 
   <!-- the venue -->
   <section class="sheet" data-sky="3" id="venue">
-    <div class="frame" aria-hidden="true"></div>
     <div class="half">
       <p class="caps">The venue</p>
       <h2 class="title foil">Hotel Platinum</h2>
@@ -378,7 +386,6 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
 
   <!-- the ring ceremony -->
   <section class="sheet" data-sky="4" id="ceremony">
-    <div class="frame" aria-hidden="true"></div>
     <div class="half">
       <p class="caps">The ring ceremony</p>
       <h2 class="title foil">Two hearts, one promise</h2>
@@ -408,6 +415,7 @@ body[data-sky="0"] .s0, body[data-sky="1"] .s1, body[data-sky="2"] .s2, body[dat
       </button>
     </div>
   </section>
+</div>
   <div class="foot"><p class="caps">With love · Chirag &amp; Janvi · 15 · 11 · 2026</p></div>
 </main>
 <audio id="audio" src="music.mp3" loop preload="none"></audio>
